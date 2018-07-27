@@ -1,0 +1,11 @@
+spring:
+  main:
+    web-environment: false
+
+
+vehicle:
+  service:
+    url: http://localhost:8080/vehicle/vehicle/?size=1000
+  ping:
+    url: http://localhost:8080/vehicle/vehicle/ping/
+

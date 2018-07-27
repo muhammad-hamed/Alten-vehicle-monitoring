@@ -1,0 +1,41 @@
+<div *ngIf="customer">
+  
+  <div *ngIf="customer.id">
+      <h2>{{customer.name | uppercase}} Details</h2>
+    <span>ID: </span>{{customer.id}}</div>
+  <div>
+    <label>Customer Name:
+      <input [(ngModel)]="customer.name" placeholder="name" />
+    </label>
+  </div>
+  <div>
+
+    <label>AddressLine:
+      <input [(ngModel)]="customer.address.addressLine" placeholder="addressline" />
+    </label>
+  </div>
+  <div>
+    <label>Country:
+      <input [(ngModel)]="customer.address.country" placeholder="country" />
+    </label>
+  </div>
+  <div>
+    <label>City:
+      <input [(ngModel)]="customer.address.city" placeholder="city" />
+    </label>
+  </div>
+  <div>
+    <label>State:
+      <input [(ngModel)]="customer.address.state" placeholder="state" />
+    </label>
+  </div>
+  <div>
+    <label>Postal Code:
+      <input [(ngModel)]="customer.address.postalCode" placeholder="postal Code" />
+    </label>
+  </div>
+  <div id="btns">
+    <button (click)="goBack()">back</button>
+    <button (click)="save()">save</button>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<ul class="vehicles">
+  <div>
+    <label class="fifty">
+      Status :
+      <select (change)="onStatusChange($event.target.value)">
+        <option value="ALL">All</option>
+        <option value="ONLINE">Online</option>
+        <option value="OFFLINE">Offline</option>
+      </select>
+
+    </label>
+
+    <label class="fifty">Customer:
+      <select (change)="onChangeCustomer($event.target.value)">
+        <option *ngFor="let customer of customers" [value]="customer.id">{{customer.name}}</option>
+      </select>
+    </label>
+
+  </div>
+  <br/>
+  <li *ngFor="let vehicle of vehicles" class="{{vehicle.status | lowercase}}">
+    <a routerLink="/vehicledetail/{{vehicle.id}}">
+      <span class="badge">{{vehicle.registerationNumber}}</span> {{vehicle.vehicleID}}
+    </a>
+    <button class="delete" title="delete vrhicle" (click)="delete(vehicle)">x</button>
+  </li>
+</ul>
+<button (click)="add()" class='addbtn'> + </button>
+<div class="center" *ngIf="pages && pages.length > 1">
+  <div class="pagination">
+    <a *ngFor="let pageNumber of pages" href="{{pageUrl}}?page={{pageNumber}}" [class.active]="pageNumber===currentPage">{{pageNumber + 1}}</a>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<h2>Vehicle Status Overview</h2>
+
+<div style="display: block;width: 80%;  margin: 0 auto;">
+  <canvas baseChart
+              [data]="doughnutChartData"
+              [labels]="doughnutChartLabels"
+              [chartType]="doughnutChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+</div>
+
+<p class="hint" >Click on the status to get more info about {{vehicleStats.total}} vehicle/s.
+</p>

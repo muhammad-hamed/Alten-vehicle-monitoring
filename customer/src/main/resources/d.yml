@@ -1,0 +1,46 @@
+version: "3.3"
+services:
+  discovery:
+    build: discovery-service
+    command:
+      sh -c 'java -jar -Xmx200m -Dspring.profiles.active=development -Dserver.port=8090 /app/discovery-service-0.0.1-SNAPSHOT.jar'
+    volumes:
+      - ./wait-for-it.sh:/tmp/wait-for-it.sh
+    ports:
+      - 8090:8090
+
+  gateway:
+      build: gateway-service
+      depends_on:
+        - discovery
+      command:
+        sh -c 'chmod -R 777 /tmp; while ! /tmp/wait-for-it.sh discovery:8090 -t 30; do echo "waiting for discovery Server to start..."; sleep 1; done; java -jar -Xmx200m -Dspring.profiles.active=development -Dserver.port=8080 -Dservice.instance.name=gateway /app/gateway-service-0.0.1-SNAPSHOT.jar'
+      volumes:
+        - ./wait-for-it.sh:/tmp/wait-for-it.sh
+      ports:
+        - 8080:8080
+  
+
+  customer:
+      build: customer
+      depends_on:
+        - discovery
+      command:
+        sh -c 'chmod -R 777 /tmp; while ! /tmp/wait-for-it.sh discovery:8090 -t 30; do echo "waiting for discovery Server to start..."; sleep 1; done; java -jar -Xmx200m -Dspring.profiles.active=development -Dserver.port=8081 -Dservice.instance.name=customer /app/customer-0.0.1-SNAPSHOT.jar'
+      volumes:
+        - ./wait-for-it.sh:/tmp/wait-for-it.sh
+      ports:
+        - 8081:8081
+
+
+  vehicle:
+      build: vehicle
+      depends_on:
+        - discovery
+      command:
+        sh -c 'chmod -R 777 /tmp; while ! /tmp/wait-for-it.sh discovery:8090 -t 30; do echo "waiting for discovery Server to start..."; sleep 1; done; java -jar -Xmx200m -Dspring.profiles.active=development -Dserver.port=8082 -Dservice.instance.name=vehicle /app/vehicle-0.0.1-SNAPSHOT.jar'
+      volumes:
+        - ./wait-for-it.sh:/tmp/wait-for-it.sh
+      ports:
+        - 8082:8082
+

@@ -1,0 +1,13 @@
+h2, p { 
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+    margin: 40px auto;
+    display: block;
+}
+.hint {
+    font-size: 10 pt;
+    margin-top: 20px;
+    width: 100%;
+    color: rgb(199, 195, 195);
+}

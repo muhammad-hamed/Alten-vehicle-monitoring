@@ -1,0 +1,45 @@
+version: "3.3"
+services:
+  monitoring:
+    build:
+      context: vehicle-monitoring
+      dockerfile: Dockerfile
+    volumes:
+      - './vehicle-monitoring:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - 4200:4200
+
+  discovery:
+    build: discovery-service
+    ports:
+      - 8090:8090
+      - 8761:8761
+
+  gateway:
+      build: gateway-service
+      depends_on:
+        - discovery
+      ports:
+        - 8080:8080
+      environment:
+        REGISTRY_URL: http://discovery:8090/eureka/
+        VEHICLE_MONITORING_APP_URL: http://monitoring:4200/
+  
+  customer:
+      build: customer
+      depends_on:
+        - discovery
+      ports:
+        - 8081:8081
+      environment:
+        REGISTRY_URL: http://discovery:8090/eureka/
+
+  vehicle:
+      build: vehicle
+      depends_on:
+        - discovery
+      ports:
+        - 8082:8082
+      environment:
+        REGISTRY_URL: http://discovery:8090/eureka/

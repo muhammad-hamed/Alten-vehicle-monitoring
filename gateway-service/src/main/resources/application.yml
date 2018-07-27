@@ -1,0 +1,35 @@
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8090/eureka/
+spring:
+  application:
+    name: gateway
+zuul:
+  routes:
+    ui:
+      url: http://localhost:4200/
+    customer:
+      path: customer/**
+      service-id: customer
+    vehicle:
+      path: vehicle/**
+      service-id: vehicle
+
+---
+spring:
+  profiles: docker
+  
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: ${REGISTRY_URL}
+      
+zuul:
+  routes:
+    ui:
+      url: ${VEHICLE_MONITORING_APP_URL}

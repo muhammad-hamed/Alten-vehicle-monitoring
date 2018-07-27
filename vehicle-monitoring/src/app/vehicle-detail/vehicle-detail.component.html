@@ -1,0 +1,37 @@
+<div *ngIf="vehicle">
+
+  <div *ngIf="vehicle.id">
+    <h2>{{vehicle.registerationNumber | uppercase}} Details</h2>
+    <span>ID: </span>{{vehicle.id}}</div>
+  <div>
+    <label>Vehicle IDentifier:
+      <input [(ngModel)]="vehicle.vehicleID" placeholder="Vehicle Identifier"   pattern=".{17,}"   required title="17 characters minimum" />
+    </label>
+  </div>
+  <div>
+
+    <label>Registeration Number:
+      <input [(ngModel)]="vehicle.registerationNumber" placeholder="egisteration Number" pattern=".{6,}"   required title="6 characters minimum" />
+    </label>
+  </div>
+  <div>
+    <label>Status:
+      <select [(ngModel)]="vehicle.status" required>
+        <option value="ONLINE" [selected]="vehicle.status=='ONLINE'">ONLINE</option>
+        <option value="OFFLINE" [selected]="vehicle.status=='OFFLINE'">OFFLINE</option>
+      </select>
+    </label>
+  </div>
+  <div>
+    <label>Customer:
+      <select [(ngModel)]="vehicle.customerID" required>
+        <option *ngFor="let customer of customers" [value]="customer.id" [selected]="vehicle.customerID == customer.id">{{customer.name}}</option>
+      </select>
+    </label>
+  </div>
+
+  <div id="btns">
+    <button (click)="goBack()">back</button>
+    <button (click)="save()">save</button>
+  </div>
+</div>

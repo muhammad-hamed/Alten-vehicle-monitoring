@@ -1,0 +1,14 @@
+<ul class="customers">
+  <li *ngFor="let customer of customers">
+    <a routerLink="/custdetail/{{customer.id}}">
+      <span class="badge">{{customer.id}}</span> {{customer.name}}
+    </a>
+    <button class="delete" title="delete customer" (click)="delete(customer)">x</button>
+  </li>
+</ul>
+<button (click)="add()" class='addbtn'> + </button>
+<div class="center" *ngIf="pages && pages.length > 1">
+    <div class="pagination">
+      <a *ngFor="let pageNumber of pages" href="customer/{{pageNumber}}" [class.active]="pageNumber===currentPage">{{pageNumber + 1}}</a>
+    </div>
+  </div>

@@ -1,0 +1,10 @@
+<div id="search-component">
+  <input #searchBox id="search-box" (keyup)="search(searchBox.value)"   placeholder="Customer Search"/>
+  <ul class="search-result">
+    <li *ngFor="let customer of customers$ | async" >
+      <a routerLink="/custdetail/{{customer.id}}"  (click)="customers$=of([])">
+        {{customer.name}}
+      </a>
+    </li>
+  </ul>
+</div>
