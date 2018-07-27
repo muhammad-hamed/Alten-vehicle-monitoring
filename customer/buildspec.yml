@@ -8,14 +8,13 @@ phases:
       - add-apt-repository ppa:openjdk-r/ppa
       - apt-get update -y
       - apt-get install -y openjdk-8-jdk
-      - apt-get install -y maven
   build:
     commands:
       - echo Build started on `date`
       - cd customer
-      - mvn test -Deureka.client.enabled=false  -B
+      - ./mvnw test -Deureka.client.enabled=false  -B
       - echo Build completed on `date`
-      - mvn package -Deureka.client.enabled=false -DskiptTests  -B
+      - ./mvnw package -Deureka.client.enabled=false -DskiptTests  -B
       - docker build -t customer .
   post_build:
     commands:

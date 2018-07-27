@@ -3,9 +3,9 @@ jdk: oraclejdk8
 install: true
 script: 
   - cd customer 
-  - mvn test -Deureka.client.enabled=false  -B
+  - ./mvnw test -Deureka.client.enabled=false  -B
   - cd ../vehicle
-  - mvn test -Deureka.client.enabled=false  -B
+  - ./mvnw test -Deureka.client.enabled=false  -B
 
 cache:
   directories:
