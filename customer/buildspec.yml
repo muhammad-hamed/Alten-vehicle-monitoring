@@ -4,10 +4,12 @@ phases:
   install:
     commands:
       - apt-get update -y
-      - apt-get install -y software-properties-common
-      - add-apt-repository ppa:openjdk-r/ppa
+      - apt-get install -y software-properties-common=0.92.37.8
+      - add-apt-repository -y ppa:openjdk-r/ppa
+      - (echo oracle-java$JAVA_VERSION-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections)
       - apt-get update -y
       - apt-get install -y openjdk-8-jdk
+      - update-ca-certificates -f
   build:
     commands:
       - echo Build started on `date`
