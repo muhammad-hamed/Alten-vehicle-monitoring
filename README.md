@@ -3,6 +3,10 @@
 [![build status](https://travis-ci.org/muhammad-hamed/Alten-vehicle-monitoring.svg?branch=master "build status")](https://travis-ci.org/muhammad-hamed/Alten-vehicle-monitoring "build status")
 
 
+
+![Alt text](images/overview.png?raw=true "Angular app")
+
+
 ## Scenario:
 Imagine you are an Alten consultant and you got assigned to a project at one of our top partners.
 They have a number of connected vehicles that belongs to a number of customers.
@@ -46,36 +50,131 @@ This can either be solved by using static values or ​​by creating a separate
 Below you have all customers from the system; their addresses and the vehicles they own.
 
 
- |  Kalles Grustransporter AB          | 
- |  Cementvägen 8, 111 11 Södertälje   | 
- | ----------------------------------- | 
- |  VIN (VehicleId)       Reg. nr.     | 
- | ----------------------------------- | 
- |  YS2R4X20005399401     ABC123       | 
- |  VLUR4X20009093588     DEF456       | 
- |  VLUR4X20009048066     GHI789       | 
- | ----------------------------------- | 
+ Customer name: **Kalles Grustransporter AB**
+ 
+ Customer address: **Cementvägen 8, 111 11 Södertälje**
+ 
+ |  VIN (VehicleId)    |   Reg. nr.   | 
+ | --- | --- |
+ |  YS2R4X20005399401  |   ABC123       | 
+ |  VLUR4X20009093588  |   DEF456       | 
+ |  VLUR4X20009048066   |  GHI789       | 
 
- |  Johans Bulk AB                     | 
- |  Balkvägen 12, 222 22 Stockholm     | 
- | ----------------------------------- | 
- |  VIN (VehicleId)       Reg. nr.     | 
- | ----------------------------------- | 
- |  YS2R4X20005388011     JKL012       | 
- |  YS2R4X20005387949     MNO345       | 
- | ------------------------------------ | 
+ Customer name: **KJohans Bulk AB** 
+ 
+ Customer address: **Balkvägen 12, 222 22 Stockholm**
+ 
+ |  VIN (VehicleId)   |    Reg. nr.     | 
+ | --- | --- |
+ |  YS2R4X20005388011  |   JKL012       | 
+ |  YS2R4X20005387949  |   MNO345       | 
 
- |  Haralds Värdetransporter AB        | 
- |  Budgetvägen 1, 333 33 Uppsala      | 
- | ----------------------------------- | 
- |  VIN (VehicleId)       Reg. nr.     | 
- | ----------------------------------- | 
- |  VLUR4X20009048066     PQR678       | 
- |  YS2R4X20005387055     STU901       | 
- | ----------------------------------- | 
+ Customer name: **Haralds Värdetransporter AB**
+ 
+ Customer address: **Budgetvägen 1, 333 33 Uppsala** 
+ 
+ | VIN (VehicleId)   |    Reg. nr. | 
+ | --- | --- |
+ |  VLUR4X20009048066  |   PQR678       | 
+ |  YS2R4X20005387055  |  STU901       | 
 
 
-# Solution Architecture selection
+# Solution Architecture
+
+## Architecture Selection
+
+In our project the partner's business is highly dynamic. Also the business scaling is promising. So we recommed that 
+the application will be cloud compliant. The selection of the archicture here will be a **Microservice Architecure** it
+will be optimal for this business agility. The load on the application endpoints is not close. ex:ping service will be 
+hitted more that the custoemr search so scalling this endpoint only will be cost saving compared to replicaing the whole application. 
+Also the give the flexability to add new small and independant components to enrich the customer business.
+
+![Alt text](images/reference-architecture.png?raw=true "Micoservice architecture")
+
+## Technologies
+
+The related technologies to this *Reference Architecture* mentioned in the below diagram. 
+
+![Alt text](images/reference-architecture-tech.png?raw=true "Micoservice architecture technologies")
+
+
+The mentioned technologies are used in the impelemantation of this project into the below modules.
+- **discovery-service** : build over Zuul to load balance and hide the service complexity.
+- **gateway-service** : build over Eureka to keep registery with the service instances, also used by the gateway to load balance.
+- **customer** : Spring boot (web, Data) ,flywayDB, h2-database, swagger and jacoco. Customer store management.
+- **vehicle** : Spring boot (web, Data) ,flywayDB, h2-database, Swagger and jacoco. Vehicle store management.
+- **vehicle-monitoring**: Angular frontend app.
+- **vehicle-signal-generator** : Spring boot (web) , util to demo the signal status.
+
+
+## Deployment (Development env)
+
+first of all you need to build the mentioned projects (each project has it's own pipeline):
+
+1. discovery-service
+   ```shell
+   cd discovery-service
+   mvn package
+   ```
+2. gateway-service
+   ```shell
+   cd gateway-service
+   mvn package
+   ```
+3. customer
+   ```shell
+   cd customer
+   mvn package
+   ```
+4. vehicle
+   ```shell
+   cd vehicle
+   mvn package
+   ```
+5. vehicle-monitoring
+   ```shell
+   cd vehicle-monitoring
+   npm install
+   ng build
+   ```
+6. vehicle-signal-generator
+   ```shell
+   cd vehicle-signal-generator
+   mvn package
+   ```
+   
+ **now** got to the workspace root to run the whole environment locally using **docker-compose**
+ ```shell
+ docker-compose build
+ docker-compose up
+ ```
+ or 
+ 
+ ```shell
+ docker-compose up --build
+ ```
+ 
+ Check up the components
+ 
+  - **vehicle-monitoring** : open the Webapp http://localhost:8080/ui/
+    ![Alt text](images/overview.png?raw=true "Angular app")
+ - **customer service** : check the swagger of the customer service  http://localhost:8080/customer/swagger-ui.html#
+   ![Alt text](images/customer-swagger.png?raw=true "Customer's API swagger")
+ - **vehicle service** : check the swagger of the customer service  http://localhost:8080/vehicle/swagger-ui.html#
+   ![Alt text](images/vehicle-swagger.png?raw=true "Customer's API swagger")
+ - **discovery-serice** : check the *Eureka* dashboard http://localhost:8090/
+
+
+
+ 
+ 
+ 
+ 
+
+
+
+
+
 
 
 
