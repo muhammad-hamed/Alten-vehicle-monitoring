@@ -9,17 +9,13 @@ phases:
       - apt-get update -y
       - apt-get install -y openjdk-8-jdk
       - apt-get install -y maven
-  pre_build:
-    commands:
-      - echo Logging in to Amazon ECR...
-      - $(aws ecr get-login --region us-east-1)
   build:
     commands:
       - echo Build started on `date`
       - cd customer
-      - ./mvnw test -Deureka.client.enabled=false  -B
+      - mvn test -Deureka.client.enabled=false  -B
       - echo Build completed on `date`
-      - ./mvnw package -Deureka.client.enabled=false -DskiptTests  -B
+      - mvn package -Deureka.client.enabled=false -DskiptTests  -B
       - docker build -t customer .
   post_build:
     commands:
