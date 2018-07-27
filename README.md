@@ -45,36 +45,34 @@ This can either be solved by using static values or ​​by creating a separate
 ## Data:
 Below you have all customers from the system; their addresses and the vehicles they own.
 
-|-----------------------------------|
-| Kalles Grustransporter AB         |
-| Cementvägen 8, 111 11 Södertälje  |
-|-----------------------------------|
-| VIN (VehicleId)       Reg. nr.    |
-|-----------------------------------|
-| YS2R4X20005399401     ABC123      |
-| VLUR4X20009093588     DEF456      |
-| VLUR4X20009048066     GHI789      |
-|-----------------------------------|
 
-|-----------------------------------|
-| Johans Bulk AB                    |
-| Balkvägen 12, 222 22 Stockholm    |
-|-----------------------------------|
-| VIN (VehicleId)       Reg. nr.    |
-|-----------------------------------|
-| YS2R4X20005388011     JKL012      |
-| YS2R4X20005387949     MNO345      |
-------------------------------------|
+ |  Kalles Grustransporter AB          | 
+ |  Cementvägen 8, 111 11 Södertälje   | 
+ | ----------------------------------- | 
+ |  VIN (VehicleId)       Reg. nr.     | 
+ | ----------------------------------- | 
+ |  YS2R4X20005399401     ABC123       | 
+ |  VLUR4X20009093588     DEF456       | 
+ |  VLUR4X20009048066     GHI789       | 
+ | ----------------------------------- | 
 
-|-----------------------------------|
-| Haralds Värdetransporter AB       |
-| Budgetvägen 1, 333 33 Uppsala     |
-|-----------------------------------|
-| VIN (VehicleId)       Reg. nr.    |
-|-----------------------------------|
-| VLUR4X20009048066     PQR678      |
-| YS2R4X20005387055     STU901      |
-|-----------------------------------|
+ |  Johans Bulk AB                     | 
+ |  Balkvägen 12, 222 22 Stockholm     | 
+ | ----------------------------------- | 
+ |  VIN (VehicleId)       Reg. nr.     | 
+ | ----------------------------------- | 
+ |  YS2R4X20005388011     JKL012       | 
+ |  YS2R4X20005387949     MNO345       | 
+ | ------------------------------------ | 
+
+ |  Haralds Värdetransporter AB        | 
+ |  Budgetvägen 1, 333 33 Uppsala      | 
+ | ----------------------------------- | 
+ |  VIN (VehicleId)       Reg. nr.     | 
+ | ----------------------------------- | 
+ |  VLUR4X20009048066     PQR678       | 
+ |  YS2R4X20005387055     STU901       | 
+ | ----------------------------------- | 
 
 
 # Solution Architecture selection
