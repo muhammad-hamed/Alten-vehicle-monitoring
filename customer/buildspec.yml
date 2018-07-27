@@ -4,9 +4,9 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - mvn test
+      - ./mvnw test -Deureka.client.enabled=false  -B
       - echo Build completed on `date`
-      - mvn package
+      - ./mvnw package -Deureka.client.enabled=false -DskiptTests  -B
       - docker build -t customer .
   post_build:
     commands:
