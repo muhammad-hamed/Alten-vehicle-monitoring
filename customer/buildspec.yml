@@ -4,8 +4,7 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - pwd
-      - ls -la
+      - cd customer
       - ./mvnw test -Deureka.client.enabled=false  -B
       - echo Build completed on `date`
       - ./mvnw package -Deureka.client.enabled=false -DskiptTests  -B
