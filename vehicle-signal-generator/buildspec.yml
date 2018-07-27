@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo Build started on `date`
+      - mvn test
+      - echo Build completed on `date`
+      - mvn package
+      - docker build -t vehicle-signal .
+  post_build:
+    commands:
+      - eval `aws ecr get-login --no-include-email --region us-east-1`
+      - docker tag vehicle-signal:latest 722103257780.dkr.ecr.us-east-1.amazonaws.com/alten-vehicle/vehicle-signal:latest
+      - docker push 722103257780.dkr.ecr.us-east-1.amazonaws.com/alten-vehicle/vehicle-signal:latest
