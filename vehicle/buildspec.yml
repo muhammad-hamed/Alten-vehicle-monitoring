@@ -4,6 +4,7 @@ phases:
   build:
     commands:
       - echo Build started on `date`
+      - cd vehicle
       - mvn test
       - echo Build completed on `date`
       - mvn package
