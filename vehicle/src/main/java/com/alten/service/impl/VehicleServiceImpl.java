@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.alten.dto.VehicleStatsDTO;
+import com.alten.exception.VehicleNotFoundException;
 import com.alten.model.OnlineStatus;
 import com.alten.model.PingSignal;
 import com.alten.model.Vehicle;
@@ -57,7 +58,7 @@ public class VehicleServiceImpl implements VehicleService {
 	@Override
 	public Vehicle getVehicleByID(Long id) {
 
-		return vehicleRepository.findById(id).get();
+		return vehicleRepository.findById(id).orElseThrow(VehicleNotFoundException::new);
 	}
 
 	/**
@@ -66,7 +67,7 @@ public class VehicleServiceImpl implements VehicleService {
 	@Override
 	public Vehicle getVehicleByRegisterationNumber(String registerationNumber) {
 
-		return vehicleRepository.findByRegisterationNumber(registerationNumber).get();
+		return vehicleRepository.findByRegisterationNumber(registerationNumber).orElseThrow(VehicleNotFoundException::new);
 	}
 
 	/**
@@ -123,7 +124,7 @@ public class VehicleServiceImpl implements VehicleService {
 		PingSignal pingSignal = new PingSignal();
 
 		// update the Vehicle status
-		Vehicle vehicle = vehicleRepository.findByRegisterationNumber(registerationNumber).get();
+		Vehicle vehicle = vehicleRepository.findByRegisterationNumber(registerationNumber).orElseThrow(VehicleNotFoundException::new);
 
 		pingSignal.setRegisterationNumber(registerationNumber);
 

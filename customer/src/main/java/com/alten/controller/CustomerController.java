@@ -8,7 +8,6 @@ import javax.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -77,16 +76,16 @@ public class CustomerController {
 
 	@ApiOperation(value = "Add a new customer.")
 	@PostMapping
-	public ResponseEntity<?> save(@Valid @RequestBody CustomerDTO customer) {
+	@ResponseStatus(HttpStatus.OK)
+	public void save(@Valid @RequestBody CustomerDTO customer) {
 		customerService.save(customerMapper.convertToEntity(customer));
-		return ResponseEntity.ok().build();
 	}
 
 	@ApiOperation(value = "Update customer.")
 	@PutMapping
-	public ResponseEntity<?> update(@Valid @RequestBody CustomerDTO customer) {
+	@ResponseStatus(HttpStatus.OK)
+	public void update(@Valid @RequestBody CustomerDTO customer) {
 		customerService.save(customerMapper.convertToEntity(customer));
-		return ResponseEntity.ok().build();
 	}
 	
 	@ApiOperation(value = "Search Customers by Name or part of it <b>like *name* </b>.")

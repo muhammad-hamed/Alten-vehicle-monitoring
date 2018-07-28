@@ -15,7 +15,6 @@ public class VehicleMapperImpl implements VehicleMapper {
 	@Autowired
 	private ModelMapper modelMapper;
 
-	
 	/**
 	 * Mapper functions to convert from Vehicle Entity to VehicleDTO.
 	 * 
@@ -25,8 +24,7 @@ public class VehicleMapperImpl implements VehicleMapper {
 	 */
 	@Override
 	public VehicleDTO convertToDto(Vehicle vehicle) {
-		VehicleDTO vehicleDto = modelMapper.map(vehicle, VehicleDTO.class);
-		return vehicleDto;
+		return modelMapper.map(vehicle, VehicleDTO.class);
 	}
 
 	/**
@@ -38,8 +36,7 @@ public class VehicleMapperImpl implements VehicleMapper {
 	 */
 	@Override
 	public Vehicle convertToEntity(VehicleDTO vehicleDto) {
-		Vehicle vehicle = modelMapper.map(vehicleDto, Vehicle.class);
-		return vehicle;
+		return modelMapper.map(vehicleDto, Vehicle.class);
 	}
 
 	/**
@@ -52,8 +49,7 @@ public class VehicleMapperImpl implements VehicleMapper {
 	 */
 	@Override
 	public PingSignalDTO convertToDto(PingSignal pingSignal) {
-		PingSignalDTO pingSignalDto = modelMapper.map(pingSignal, PingSignalDTO.class);
-		return pingSignalDto;
+		return modelMapper.map(pingSignal, PingSignalDTO.class);
 	}
 
 }

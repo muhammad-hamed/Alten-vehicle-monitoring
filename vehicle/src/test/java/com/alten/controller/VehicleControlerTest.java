@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -85,18 +86,23 @@ public class VehicleControlerTest {
 
 	@Test
 	public void testSave() throws Exception {
-		VehicleDTO vehicleDTO = new VehicleDTO();
-		vehicleDTO.setId(4l);
-		vehicleDTO.setCustomerID(5l);
-		vehicleDTO.setVehicleID("12345678901234567");
-		vehicleDTO.setRegisterationNumber("123456");
-		vehicleDTO.setStatus(OnlineStatus.OFFLINE);
-
+		VehicleDTO vehicleDTO = geVehicleDTO();
 		when(vehicleServiceImpl.save(any())).thenReturn(vehicleMapper.convertToEntity(vehicleDTO));
 
 		String jsonObj = TestUtils.asJsonString(vehicleDTO);
 		System.out.println("mmm jsonObj:" + jsonObj);
 		mockMvc.perform(post("/vehicle").contentType(MediaType.APPLICATION_JSON).content(jsonObj)
+				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isCreated());
+	}
+	
+	@Test
+	public void testUpdate() throws Exception {
+		VehicleDTO vehicleDTO = geVehicleDTO();
+		when(vehicleServiceImpl.save(any())).thenReturn(vehicleMapper.convertToEntity(vehicleDTO));
+
+		String jsonObj = TestUtils.asJsonString(vehicleDTO);
+		System.out.println("mmm jsonObj:" + jsonObj);
+		mockMvc.perform(put("/vehicle").contentType(MediaType.APPLICATION_JSON).content(jsonObj)
 				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isCreated());
 	}
 
@@ -111,6 +117,17 @@ public class VehicleControlerTest {
 				.andExpect(jsonPath("$..id").value(5));
 	}
 
+	@Test
+	public void testDeleteVehicle() throws Exception {
+		Vehicle vehicle = new Vehicle();
+		vehicle.setId(5l);
+		vehicle.setLastPingDate(ZonedDateTime.now());
+
+		when(vehicleServiceImpl.getVehicleByID(any())).thenReturn(vehicle);
+
+		mockMvc.perform(delete("/vehicle/5")).andExpect(status().isOk());
+	}
+	
 	@Test
 	public void testGetVehiclesByCustomerID() throws Exception {
 		Vehicle vehicle = getVehicle();
@@ -151,6 +168,17 @@ public class VehicleControlerTest {
 		vehicle.setVehicleID("12345678901234567");
 		vehicle.setLastPingDate(ZonedDateTime.now());
 		return vehicle;
+	}
+	
+	
+	private VehicleDTO geVehicleDTO() {
+		VehicleDTO vehicleDTO = new VehicleDTO();
+		vehicleDTO.setId(4l);
+		vehicleDTO.setCustomerID(5l);
+		vehicleDTO.setVehicleID("12345678901234567");
+		vehicleDTO.setRegisterationNumber("123456");
+		vehicleDTO.setStatus(OnlineStatus.OFFLINE);
+		return vehicleDTO;
 	}
 
 }

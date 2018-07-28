@@ -4,8 +4,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import org.mockito.internal.util.reflection.FieldSetter;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -41,7 +43,7 @@ import com.google.gson.Gson;
 public class CustomerControlerTest {
 
 	private MockMvc mockMvc;
-	
+
 	@Mock
 	private CustomerMapper customerMapper;
 
@@ -50,13 +52,14 @@ public class CustomerControlerTest {
 
 	@InjectMocks
 	private CustomerController customerController;
-	
+
 	private CustomerMapper localCustomerMapper = new CustomerMapperImpl(new ModelMapper());
-	
+
 	@Before
 	public void setup() throws Exception {
 		mockMvc = MockMvcBuilders.standaloneSetup(customerController).build();
-		FieldSetter.setField(customerController, customerController.getClass().getDeclaredField("customerMapper"), localCustomerMapper);
+		FieldSetter.setField(customerController, customerController.getClass().getDeclaredField("customerMapper"),
+				localCustomerMapper);
 	}
 
 	@Test
@@ -64,7 +67,7 @@ public class CustomerControlerTest {
 		Customer customer = new Customer();
 		customer.setId(5l);
 		List<Customer> customerList = Arrays.asList(customer);
-	
+
 		when(customerServiceImpl.getCustomers(any())).thenReturn(new PageImpl<>(customerList));
 
 		mockMvc.perform(get("/customer")).andExpect(status().isOk()).andDo(print())
@@ -84,7 +87,58 @@ public class CustomerControlerTest {
 	}
 
 	@Test
+	public void testDeleteCustomer() throws Exception {
+		Customer customer = new Customer();
+		customer.setId(5l);
+
+		when(customerServiceImpl.getCustomerByID(any())).thenReturn(customer);
+
+		mockMvc.perform(delete("/customer/5")).andExpect(status().isOk()).andDo(print());
+	}
+
+	@Test
+	public void testDeleteNonExistingCustomer() throws Exception {
+
+		when(customerServiceImpl.getCustomerByID(any())).thenReturn(null);
+
+		mockMvc.perform(delete("/customer/5")).andExpect(status().isNotFound()).andDo(print());
+	}
+
+	@Test
 	public void testSave() throws Exception {
+		CustomerDTO customer = createCustomer();
+
+		when(customerServiceImpl.save(any())).thenReturn(localCustomerMapper.convertToEntity(customer));
+
+		String jsonObj = TestUtils.asJsonString(customer);
+		mockMvc.perform(post("/customer").contentType(MediaType.APPLICATION_JSON).content(jsonObj)
+				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
+	}
+
+	@Test
+	public void testUpdate() throws Exception {
+		CustomerDTO customer = createCustomer();
+
+		when(customerServiceImpl.save(any())).thenReturn(localCustomerMapper.convertToEntity(customer));
+
+		String jsonObj = TestUtils.asJsonString(customer);
+		mockMvc.perform(put("/customer").contentType(MediaType.APPLICATION_JSON).content(jsonObj)
+				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
+	}
+	
+	
+	@Test
+	public void testSearchCustomerByName() throws Exception {
+		Customer customer = new Customer();
+		customer.setId(5l);
+		when(customerServiceImpl.searchCustomers(any())).thenReturn(Arrays.asList(customer));
+
+		mockMvc.perform(get("/customer/search?name=h")).andExpect(status().isOk()).andDo(print())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(jsonPath("$..id").value(5));
+	}
+
+	private CustomerDTO createCustomer() {
 		CustomerDTO customer = new CustomerDTO();
 		customer.setId(4l);
 		customer.setName("name");
@@ -97,12 +151,7 @@ public class CustomerControlerTest {
 		address.setPostalCode("12 961");
 
 		customer.setAddress(address);
-		
-		when(customerServiceImpl.save(any())).thenReturn(localCustomerMapper.convertToEntity(customer));
-
-		String jsonObj = TestUtils.asJsonString(customer);
-		mockMvc.perform(post("/customer").contentType(MediaType.APPLICATION_JSON).content(jsonObj)
-				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
+		return customer;
 	}
 
 }

@@ -12,14 +12,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class ApplicationConfig {
 
-	@Bean
-	public ModelMapper modelMapper() {
-		return new ModelMapper();
-	}
-	
-	@Bean
-	public RestTemplate getRestTemplate(){
+	@Bean(name="restTemplate")
+	public RestTemplate getRestTemplate() {
 		return new RestTemplate();
+	}
+
+	@Bean(name="modelMapper")
+	public ModelMapper getModelMapper() {
+		return new ModelMapper();
 	}
 	
 }
