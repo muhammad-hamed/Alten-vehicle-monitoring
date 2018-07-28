@@ -165,17 +165,17 @@ first of all you need to build the mentioned projects (each project has it's own
 
 ## CI/CD
   travis-ci and AWS
-  AWS CodeBuild is used to achieve:
+  **AWS CodeBuild** is used to achieve:
   - build the application.
   - build the Docker image.
-  - publish it to the AWS ECR.
-  *\*) check the ```${app.dir}/buildspec.yml``` * 
+  - publish it to the AWS ECR. 
+   \*) check the ```${app.dir}/buildspec.yml``` 
  
- AWS Codepipe line
+ **AWS Codepipeline**
   - Trigger the build
   - Deploy the a task. 
  
- ECS is used to achive:
+ **ECS** is used to achive:
   - runtime enviroment.
  
 
@@ -184,10 +184,12 @@ first of all you need to build the mentioned projects (each project has it's own
   I've integrated travis-ci to SonarCloud to publish the Code analysis for Two Services
   - **Customer Rest**
      SonarCloud public link : https://sonarcloud.io/dashboard?id=com.alten%3Acustomer 
+     
   ![Code quality](https://sonarcloud.io/api/project_badges/measure?project=com.alten%3Acustomer&metric=alert_status "Code Quality") ![Code Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.alten%3Acustomer&metric=coverage "Code Coverage") ![Code Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.alten%3Acustomer&metric=sqale_rating "Code Coverage") ![Loc](https://sonarcloud.io/api/project_badges/measure?project=com.alten%3Acustomer&metric=ncloc "Lines of Code") ![Code duplication](https://sonarcloud.io/api/project_badges/measure?project=com.alten%3Acustomer&metric=duplicated_lines_density) ![Vul](https://sonarcloud.io/api/project_badges/measure?project=com.alten%3Acustomer&metric=vulnerabilities)
   
   - **Vehicle Rest**
    SonarCloud public link : https://sonarcloud.io/dashboard?id=com.alten%3Avehicle
+   
   ![Code quality](https://sonarcloud.io/api/project_badges/measure?project=com.alten%3Avehicle&metric=alert_status "Code Quality") ![Code Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.alten%3Avehicle&metric=coverage "Code Coverage") ![Code Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.alten%3Avehicle&metric=sqale_rating "Code Coverage") ![Loc](https://sonarcloud.io/api/project_badges/measure?project=com.alten%3Avehicle&metric=ncloc "Lines of Code") ![Code duplication](https://sonarcloud.io/api/project_badges/measure?project=com.alten%3Avehicle&metric=duplicated_lines_density) ![Vul](https://sonarcloud.io/api/project_badges/measure?project=com.alten%3Avehicle&metric=vulnerabilities)
   
   
