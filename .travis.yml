@@ -4,6 +4,8 @@ install: true
 script: 
   - cd customer 
   - mvn test -Deureka.client.enabled=false  -B
+  - mvn sonar:sonar -Dsonar.organization=muhammad-hamed-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=59c98038fa1dfc16fd7e22764211429972353069
   - cd ../vehicle
   - mvn test -Deureka.client.enabled=false  -B
+  - mvn sonar:sonar -Dsonar.organization=muhammad-hamed-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=59c98038fa1dfc16fd7e22764211429972353069
 
