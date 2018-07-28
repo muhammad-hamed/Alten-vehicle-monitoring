@@ -50,7 +50,7 @@ public class CustomerController {
 	public Page<CustomerDTO> getCustomers(@RequestParam(required = false, defaultValue = "0") int page,
 			@RequestParam(required = false, defaultValue = "10") int size) {
 		return customerService.getCustomers(PageRequest.of(page, size))
-				.map(customer -> customerMapper.convertToDto(customer));
+				.map(customerMapper::convertToDto);
 	}
 
 	@ApiOperation(value = "Search a customer by id.")
@@ -93,7 +93,7 @@ public class CustomerController {
 	public List<CustomerDTO> searchCustomers(@RequestParam String name, @RequestParam(required = false, defaultValue = "0") int page,
 			@RequestParam(required = false, defaultValue = "10") int size) {
 		return customerService.searchCustomers(name).stream()
-				.map(customer -> customerMapper.convertToDto(customer)).collect(Collectors.toList());
+				.map(customerMapper::convertToDto).collect(Collectors.toList());
 	}
 
 }

@@ -49,7 +49,7 @@ public class VehicleController {
 	public Page<VehicleDTO> getVehicles(@RequestParam(required = false, defaultValue = "0") int page,
 			@RequestParam(required = false, defaultValue = "10") int size) {
 		return vehicleService.getVehicles(PageRequest.of(page, size))
-				.map(vehicle -> vehicleMapper.convertToDto(vehicle));
+				.map(vehicleMapper::convertToDto);
 	}
 
 	@ApiOperation(value = "Get a vehicle by the id.")
@@ -71,7 +71,7 @@ public class VehicleController {
 			@RequestParam(required = false, defaultValue = "0") int page,
 			@RequestParam(required = false, defaultValue = "10") int size) {
 		return vehicleService.getVhiclesByStatus(status, PageRequest.of(page, size))
-				.map(vehicle -> vehicleMapper.convertToDto(vehicle));
+				.map(vehicleMapper::convertToDto);
 	}
 
 	@ApiOperation(value = "Get a vehicle by the registerationNumber.")
@@ -86,7 +86,7 @@ public class VehicleController {
 			@RequestParam(required = false, defaultValue = "0") int page,
 			@RequestParam(required = false, defaultValue = "100") int size) {
 		return vehicleService.getVehicleByCustomerID(customerID, PageRequest.of(page, size))
-				.map(vehicle -> vehicleMapper.convertToDto(vehicle));
+				.map(vehicleMapper::convertToDto);
 	}
 
 	@ApiOperation(value = "Delete all vehicles related to the customerID.")
