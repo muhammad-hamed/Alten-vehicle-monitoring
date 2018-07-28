@@ -25,10 +25,10 @@ public interface CustomerService {
 
 	/**
 	 * Get the customer by the customer identifier.
-	 * @param CustomerID the Customer identifier.
+	 * @param customerID the Customer identifier.
 	 * @return the Customer related to the request identifier.
 	 */
-	Customer getCustomerByID(Long CustomerID);
+	Customer getCustomerByID(Long customerID);
 
 	/**
 	 * Delete The customer from the customer store.

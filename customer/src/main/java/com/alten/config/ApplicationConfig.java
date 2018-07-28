@@ -10,13 +10,13 @@ import org.springframework.web.client.RestTemplate;
 @EnableTransactionManagement
 public class ApplicationConfig {
 
-	@Bean
-	public RestTemplate RestTemplate() {
+	@Bean(name="restTemplate")
+	public RestTemplate getRestTemplate() {
 		return new RestTemplate();
 	}
 
-	@Bean
-	public ModelMapper modelMapper() {
+	@Bean(name="modelMapper")
+	public ModelMapper getModelMapper() {
 		return new ModelMapper();
 	}
 

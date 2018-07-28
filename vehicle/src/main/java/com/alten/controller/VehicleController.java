@@ -107,7 +107,7 @@ public class VehicleController {
 	@PutMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public void update(@Valid @RequestBody VehicleDTO vehicleDto) {
-		vehicleService.save(vehicleMapper.convertToEntity(vehicleDto));
+		this.save(vehicleDto);
 	}
 
 	@ApiOperation(value = "Ping Signal for a registerationNumber.")

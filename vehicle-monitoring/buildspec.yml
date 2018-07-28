@@ -3,6 +3,7 @@ version: 0.2
 phases:
   build:
     commands:
+      - cd vehicle-monitoring
       - echo Build started on `date`
       - docker build -t vehicle-monitoring .
   post_build:
