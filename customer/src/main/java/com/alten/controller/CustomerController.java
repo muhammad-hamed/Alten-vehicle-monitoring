@@ -41,7 +41,8 @@ public class CustomerController {
 	private final CustomerService customerService;
 
 	/**
-	 * Mapper from the Entity object (Database) vs. the DTO (interface with the external world). 
+	 * Mapper from the Entity object (Database) vs. the DTO (interface with the
+	 * external world).
 	 */
 	private final CustomerMapper customerMapper;
 
@@ -49,8 +50,7 @@ public class CustomerController {
 	@GetMapping
 	public Page<CustomerDTO> getCustomers(@RequestParam(required = false, defaultValue = "0") int page,
 			@RequestParam(required = false, defaultValue = "10") int size) {
-		return customerService.getCustomers(PageRequest.of(page, size))
-				.map(customerMapper::convertToDto);
+		return customerService.getCustomers(PageRequest.of(page, size)).map(customerMapper::convertToDto);
 	}
 
 	@ApiOperation(value = "Search a customer by id.")
@@ -70,8 +70,9 @@ public class CustomerController {
 		Customer customer = customerService.getCustomerByID(id);
 		if (customer != null) {
 			customerService.delete(customer);
-		} else
+		} else {
 			throw new CustomerNotFountException();
+		}
 	}
 
 	@ApiOperation(value = "Add a new customer.")
@@ -87,13 +88,14 @@ public class CustomerController {
 	public void update(@Valid @RequestBody CustomerDTO customer) {
 		customerService.save(customerMapper.convertToEntity(customer));
 	}
-	
+
 	@ApiOperation(value = "Search Customers by Name or part of it <b>like *name* </b>.")
 	@GetMapping("/search")
-	public List<CustomerDTO> searchCustomers(@RequestParam String name, @RequestParam(required = false, defaultValue = "0") int page,
+	public List<CustomerDTO> searchCustomers(@RequestParam String name,
+			@RequestParam(required = false, defaultValue = "0") int page,
 			@RequestParam(required = false, defaultValue = "10") int size) {
-		return customerService.searchCustomers(name).stream()
-				.map(customerMapper::convertToDto).collect(Collectors.toList());
+		return customerService.searchCustomers(name).stream().map(customerMapper::convertToDto)
+				.collect(Collectors.toList());
 	}
 
 }
