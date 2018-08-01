@@ -9,8 +9,6 @@ spring:
     name: gateway
 zuul:
   routes:
-    ui:
-      url: http://localhost:4200/
     customer:
       path: customer/**
       service-id: customer
@@ -29,7 +27,3 @@ eureka:
     service-url:
       defaultZone: ${REGISTRY_URL}
       
-zuul:
-  routes:
-    ui:
-      url: ${VEHICLE_MONITORING_APP_URL}

@@ -5,13 +5,15 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { VehicleStats } from './vehicle.stats';
+import { environment } from '../environments/environment';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class VehicleService {
-
-  baseUrl: string = '/vehicle/vehicle'
+  baseUrl: string = environment.url + '/vehicle/vehicle';
 
   constructor(private http: HttpClient) { }
 

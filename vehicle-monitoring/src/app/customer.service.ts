@@ -4,13 +4,15 @@ import { Page } from './Page';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
 
-  baseUrl: string = '/customer/customer'
+  host: string = environment.url;
+  baseUrl: string = this.host + '/customer/customer';
 
   constructor(private http: HttpClient) { }
 

@@ -51,4 +51,8 @@ export class VehicleOverviewComponent implements OnInit {
 
   }
 
+  chartHovered(e:any) {
+    
+  }
+
 }
