@@ -155,13 +155,18 @@ first of all you need to build the mentioned projects (each project has it's own
  
  Check up the components
  
-  - **vehicle-monitoring** : open the Webapp http://localhost:8080/ui/
+  - **vehicle-monitoring** : open the Webapp http://localhost:4200/
     ![Alt text](images/overview.png?raw=true "Angular app")
  - **customer service** : check the swagger of the customer service  http://localhost:8080/customer/swagger-ui.html#
    ![Alt text](images/customer-swagger.png?raw=true "Customer's API swagger")
  - **vehicle service** : check the swagger of the customer service  http://localhost:8080/vehicle/swagger-ui.html#
    ![Alt text](images/vehicle-swagger.png?raw=true "Customer's API swagger")
  - **discovery-serice** : check the *Eureka* dashboard http://localhost:8090/
+ 
+## Deployment (Production env)
+ - AWS **S3** for serving the static content.
+ - AWS **ECS** cluster for hosting the Container images.
+
 
 ## CI/CD
   travis-ci and AWS
@@ -176,8 +181,14 @@ first of all you need to build the mentioned projects (each project has it's own
   - Deploy the a task. 
  
  **ECS** is used to achive:
-  - runtime enviroment.
+  - Runtime enviroment.
+  
+ **S3** 
+  - Static content for the Angular App. 
  
+## Production URL
+
+  Here's the live version of the app http://altenvehicle.s3-website-us-east-1.amazonaws.com/
 
 ## Static Code Analysis
 
