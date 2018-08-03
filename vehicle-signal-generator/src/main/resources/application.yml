@@ -9,3 +9,13 @@ vehicle:
   ping:
     url: http://localhost:8080/vehicle/vehicle/ping/
 
+---
+spring:
+  profiles: aws
+
+  
+vehicle:
+  service:
+    url: http://ec2co-ecsel-y61hwaz0cmb8-1226310100.us-east-1.elb.amazonaws.com:8082/vehicle/?size=1000
+  ping:
+    url: http://ec2co-ecsel-y61hwaz0cmb8-1226310100.us-east-1.elb.amazonaws.com:8082/vehicle/ping/
