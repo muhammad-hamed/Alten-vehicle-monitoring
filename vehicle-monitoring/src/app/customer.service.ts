@@ -12,7 +12,8 @@ import { environment } from '../environments/environment';
 export class CustomerService {
 
   host: string = environment.url;
-  baseUrl: string = this.host + '8081/customer';
+
+  baseUrl: string = this.host + ':8081/customer';
 
   constructor(private http: HttpClient) { }
 

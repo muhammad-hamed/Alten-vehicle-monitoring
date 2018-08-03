@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  url: 'http://localhost'
+  url: 'http://localhost',
+  useGaeway: false
+
 };
 
 /*

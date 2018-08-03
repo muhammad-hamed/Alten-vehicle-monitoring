@@ -34,7 +34,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/customer")
 @Api(value = "Customer API")
 @AllArgsConstructor
-@CrossOrigin(origins = "http://localhost:8030")
+@CrossOrigin(origins = "*")
 public class CustomerController {
 
 	/**

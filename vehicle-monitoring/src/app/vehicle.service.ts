@@ -13,7 +13,8 @@ import { environment } from '../environments/environment';
   providedIn: 'root'
 })
 export class VehicleService {
-  baseUrl: string = environment.url + '8082/vehicle';
+
+  baseUrl: string = environment.url + ':8082/vehicle';
 
   constructor(private http: HttpClient) { }
 
