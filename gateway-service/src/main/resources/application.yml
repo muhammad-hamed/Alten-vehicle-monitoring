@@ -22,6 +22,7 @@ spring:
   
 eureka:
   instance:
+    hostname: EC2Co-EcsEl-Y61HWAZ0CMB8-1226310100.us-east-1.elb.amazonaws.com
     prefer-ip-address: true
   client:
     service-url:

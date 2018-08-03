@@ -22,6 +22,7 @@ spring:
 eureka:
   instance:
     prefer-ip-address: true
+    hostname: EC2Co-EcsEl-Y61HWAZ0CMB8-1226310100.us-east-1.elb.amazonaws.com
   client:
     service-url:
       defaultZone: ${REGISTRY_URL}

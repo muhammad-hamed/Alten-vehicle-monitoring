@@ -32,7 +32,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/vehicle")
 @Api(value = "Vehicle API")
 @AllArgsConstructor
-@CrossOrigin(origins = "http://localhost:8030")
+@CrossOrigin(origins = "*:80")
 public class VehicleController {
 	/**
 	 * The Customer management Service.
